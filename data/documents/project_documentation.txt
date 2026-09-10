@@ -1,0 +1,7 @@
+Project Documentation — ToolRouter
+
+ToolRouter is an intelligent tool-selection framework. Incoming queries are
+analyzed, scored against the registered tool catalog, checked against the
+caller's permission level, and routed to the highest-scoring eligible tool.
+Every execution is logged with timestamp, user role, selected tool, permission
+result, execution status, and latency for later audit and evaluation.
