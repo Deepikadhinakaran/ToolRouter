@@ -1,18 +1,18 @@
 
 ````markdown
-# 🧭 ToolRouter — Intelligent Tool Selection Framework
+🧭 ToolRouter — Intelligent Tool Selection Framework
 
 > A modular, permission-aware tool routing framework that intelligently selects and executes the most appropriate tool for a user query based on relevance, risk, cost, latency, and access permissions.
 
-**Query → Route → Permission Check → Execute → Answer**
+Query → Route → Permission Check → Execute → Answer
 
 ---
 
-## 🚀 Overview
+🚀 Overview
 
 Modern AI agents often have access to multiple tools such as calculators, databases, document retrieval systems, and search services. Selecting the correct tool while maintaining security, performance, and access control is a key challenge.
 
-**ToolRouter** addresses this problem by providing a centralized routing layer that evaluates available tools and selects the most suitable one for each incoming query.
+ToolRouter addresses this problem by providing a centralized routing layer that evaluates available tools and selects the most suitable one for each incoming query.
 
 The framework combines:
 
@@ -28,7 +28,7 @@ The framework combines:
 
 ---
 
-## 🎯 Problem Statement
+🎯 Problem Statement
 
 Traditional multi-tool systems may rely primarily on keyword matching or direct tool execution. This can lead to:
 
@@ -38,11 +38,11 @@ Traditional multi-tool systems may rely primarily on keyword matching or direct 
 - Higher response latency
 - Difficult-to-maintain tool integrations
 
-ToolRouter introduces a dedicated routing and authorization layer to make tool execution more **reliable, modular, secure, and observable**.
+ToolRouter introduces a dedicated routing and authorization layer to make tool execution more reliable, modular, secure, and observable.
 
 ---
 
-## 💡 Solution
+💡 Solution
 
 ToolRouter evaluates candidate tools using multiple routing factors:
 
@@ -78,17 +78,17 @@ ToolRouter evaluates candidate tools using multiple routing factors:
                   Answer
 ````
 
-This separates **tool selection** from **authorization**, allowing the framework to determine what tool is appropriate before deciding whether the current role is allowed to use it.
+This separates tool selection from authorization, allowing the framework to determine what tool is appropriate before deciding whether the current role is allowed to use it.
 
 ---
 
-# ✨ Key Features
+ ✨ Key Features
 
-### 🧠 Intelligent Tool Routing
+🧠 Intelligent Tool Routing
 
 Selects the most appropriate tool from multiple candidates based on routing criteria.
 
-### 🔐 Role-Based Access Control
+🔐 Role-Based Access Control
 
 Supports different levels of access:
 
@@ -98,15 +98,15 @@ Employee
 Admin
 ```
 
-### 🧰 Modular Tool Registry
+🧰 Modular Tool Registry
 
 Tools can be registered and extended without changing the core routing architecture.
 
-### 📚 RAG & Document Search
+📚 RAG & Document Search
 
 Supports document-based knowledge retrieval for enterprise policies and project documentation.
 
-### ⚡ Performance Tracking
+⚡ Performance Tracking
 
 Measures tool execution latency and exposes it through the API and UI.
 
