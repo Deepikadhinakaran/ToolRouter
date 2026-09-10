@@ -1,5 +1,5 @@
 
-````markdown
+
 🧭 ToolRouter — Intelligent Tool Selection Framework
 
 > A modular, permission-aware tool routing framework that intelligently selects and executes the most appropriate tool for a user query based on relevance, risk, cost, latency, and access permissions.
