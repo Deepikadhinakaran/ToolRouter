@@ -1,132 +1,96 @@
-Got it, Buddy. 👍 You want the README to describe the **project phases**, not local setup or an end-to-end installation guide.
-
-Use this `README.md`:
 
 ````markdown
 # 🧭 ToolRouter — Intelligent Tool Selection Framework
 
-ToolRouter is a modular, permission-aware tool-selection framework that intelligently routes user queries to the most appropriate tool based on **relevance, risk, cost, latency, and permissions**.
-
-### Core Workflow
+> A modular, permission-aware tool routing framework that intelligently selects and executes the most appropriate tool for a user query based on relevance, risk, cost, latency, and access permissions.
 
 **Query → Route → Permission Check → Execute → Answer**
 
 ---
 
-## 🎯 Objectives
+## 🚀 Overview
 
-- Build an intelligent tool-routing framework
-- Select the most relevant tool for each query
-- Apply role-based access control
-- Support modular tool registration
-- Enable tool/function calling
-- Provide routing transparency through candidate scores
-- Measure execution latency
-- Provide a web-based interface for interaction
+Modern AI agents often have access to multiple tools such as calculators, databases, document retrieval systems, and search services. Selecting the correct tool while maintaining security, performance, and access control is a key challenge.
 
----
+**ToolRouter** addresses this problem by providing a centralized routing layer that evaluates available tools and selects the most suitable one for each incoming query.
 
-# 📌 Project Phases
+The framework combines:
 
-## Phase 1 — Requirement Analysis
-
-### Activities
-- Identify the need for intelligent tool selection
-- Define supported user roles
-- Identify tools required by the system
-- Define routing criteria
-- Define security and permission requirements
-
-### Output
-A clear functional and architectural specification for the ToolRouter framework.
+- Intelligent tool selection
+- Role-based access control
+- Tool/function calling
+- RAG-based document retrieval
+- Modular tool registration
+- Routing score transparency
+- Execution latency tracking
+- REST API integration
+- Interactive web interface
 
 ---
 
-## Phase 2 — System Architecture Design
+## 🎯 Problem Statement
 
-### Activities
-- Design the modular architecture
-- Define the tool registry
-- Design the routing pipeline
-- Separate routing and authorization
-- Define API communication between frontend and backend
+Traditional multi-tool systems may rely primarily on keyword matching or direct tool execution. This can lead to:
 
-### Architecture
+- Incorrect tool selection
+- Unauthorized tool execution
+- Unnecessary computational cost
+- Higher response latency
+- Difficult-to-maintain tool integrations
+
+ToolRouter introduces a dedicated routing and authorization layer to make tool execution more **reliable, modular, secure, and observable**.
+
+---
+
+## 💡 Solution
+
+ToolRouter evaluates candidate tools using multiple routing factors:
 
 ```text
-User Query
-    ↓
-FastAPI Backend
-    ↓
-Tool Router
-    ↓
-Candidate Scoring
-    ↓
-Permission Check
-    ↓
-Tool Execution
-    ↓
-Response
+                    User Query
+                        │
+                        ▼
+                Query Analysis
+                        │
+                        ▼
+              Candidate Tool Set
+                        │
+            ┌───────────┼───────────┐
+            ▼           ▼           ▼
+        Relevance      Risk       Cost
+            │           │           │
+            └───────────┼───────────┘
+                        ▼
+                     Latency
+                        │
+                        ▼
+                 Tool Selection
+                        │
+                        ▼
+                Permission Check
+                   │         │
+                Granted     Denied
+                   │         │
+                   ▼         ▼
+              Execution   Rejection
+                   │
+                   ▼
+                  Answer
 ````
 
----
-
-## Phase 3 — Tool Registry Development
-
-### Activities
-
-* Create a centralized tool registry
-* Define tool metadata
-* Register available tools
-* Enable modular tool addition
-* Support reusable tool interfaces
-
-### Supported Tools
-
-* Calculator
-* Database
-* Document Search / RAG
-* Search
-
-The registry allows additional tools to be integrated without modifying the core routing architecture.
+This separates **tool selection** from **authorization**, allowing the framework to determine what tool is appropriate before deciding whether the current role is allowed to use it.
 
 ---
 
-## Phase 4 — Intelligent Routing
+# ✨ Key Features
 
-### Activities
+### 🧠 Intelligent Tool Routing
 
-* Analyze incoming queries
-* Identify candidate tools
-* Calculate routing scores
-* Rank candidate tools
-* Select the highest-relevance tool
+Selects the most appropriate tool from multiple candidates based on routing criteria.
 
-### Routing Factors
+### 🔐 Role-Based Access Control
 
-```text
-Relevance
-Risk
-Cost
-Latency
-Permissions
-```
-
-The routing layer determines which tool is most suitable for the requested operation.
-
----
-
-## Phase 5 — Permission & Security Layer
-
-### Activities
-
-* Implement role-based access control
-* Define tool permissions
-* Validate user roles
-* Perform authorization after routing
-* Return appropriate access-denied responses
-
-### Supported Roles
+Supports different levels of access:
 
 ```text
 Guest
@@ -134,54 +98,100 @@ Employee
 Admin
 ```
 
-The system separates **tool selection** from **authorization**, ensuring that routing does not automatically grant access.
+### 🧰 Modular Tool Registry
+
+Tools can be registered and extended without changing the core routing architecture.
+
+### 📚 RAG & Document Search
+
+Supports document-based knowledge retrieval for enterprise policies and project documentation.
+
+### ⚡ Performance Tracking
+
+Measures tool execution latency and exposes it through the API and UI.
+
+### 📊 Routing Transparency
+
+Displays candidate tool scores so routing decisions can be inspected.
+
+### 🔌 REST API
+
+Provides a FastAPI backend for integration with external applications.
+
+### 🖥️ Interactive UI
+
+Provides a Streamlit interface for querying the system and visualizing routing results.
+
+### 🐳 Docker Support
+
+The backend is containerized for deployment.
+
+### 🧪 Automated Testing
+
+Includes Pytest-based testing and GitHub Actions CI.
 
 ---
 
-## Phase 6 — Tool Execution
+# 🛠️ Technology Stack
 
-### Activities
+| Category         | Technologies         |
+| ---------------- | -------------------- |
+| Language         | Python               |
+| Backend          | FastAPI, Uvicorn     |
+| Agentic AI       | LangChain, LangGraph |
+| Retrieval        | RAG, Embeddings      |
+| Database         | SQLite               |
+| Frontend         | Streamlit            |
+| Containerization | Docker               |
+| Deployment       | Render               |
+| Testing          | Pytest               |
+| CI/CD            | GitHub Actions       |
 
-* Execute the selected tool
-* Process tool output
-* Handle execution failures
-* Return a structured response
-* Measure execution latency
+---
 
-### Example
+# 🧰 Supported Tools
+
+## 1. Calculator
+
+Handles mathematical and arithmetic queries.
+
+**Example:**
 
 ```text
-Query:
 Calculate 125 * 48
-
-        ↓
-
-Selected Tool:
-Calculator
-
-        ↓
-
-Execution:
-125 × 48
-
-        ↓
-
-Answer:
-6000
 ```
+
+→ Routes to `calculator`
 
 ---
 
-## Phase 7 — RAG & Document Search
+## 2. Database
 
-### Activities
+Handles structured database-related queries.
 
-* Integrate document-based search
-* Process project and policy documents
-* Retrieve relevant information
-* Support knowledge-based queries
+**Example:**
 
-### Example Documents
+```text
+Find employee 105
+```
+
+→ Routes to `database`
+
+---
+
+## 3. Document Search / RAG
+
+Retrieves information from project and policy documents.
+
+**Example:**
+
+```text
+What is the leave policy?
+```
+
+→ Routes to `document_search`
+
+Example documents:
 
 ```text
 company_policy.txt
@@ -189,189 +199,174 @@ leave_policy.txt
 project_documentation.txt
 ```
 
-This phase enables ToolRouter to handle enterprise knowledge queries in addition to computational and database operations.
-
 ---
 
-## Phase 8 — FastAPI Backend
+## 4. Search
 
-### Activities
+Handles general information-search queries.
 
-* Develop REST API endpoints
-* Create the `/chat` endpoint
-* Implement request validation
-* Connect the API with the routing engine
-* Return structured routing and execution results
-
-### API Flow
+**Example:**
 
 ```text
-Client
-  ↓
-POST /chat
-  ↓
-Query Processing
-  ↓
-Tool Routing
-  ↓
-Permission Check
-  ↓
-Tool Execution
-  ↓
-JSON Response
+Search for information about Python
 ```
 
+→ Routes to `search`
+
 ---
 
-## Phase 9 — Streamlit Interface
+# 🔐 Permission Model
 
-### Activities
-
-* Develop an interactive web interface
-* Provide query input
-* Provide role selection
-* Display selected tool
-* Display permission status
-* Display execution latency
-* Display final answer
-* Display routing scores
-
-### Interface Flow
+ToolRouter uses role-based access control.
 
 ```text
-Query Input
-     ↓
-Role Selection
-     ↓
-Execute
-     ↓
-Selected Tool
-     ↓
-Permission
-     ↓
-Latency
-     ↓
-Answer
-     ↓
-Routing Scores
+                 User
+                   │
+                   ▼
+                Query
+                   │
+                   ▼
+             Tool Router
+                   │
+                   ▼
+           Selected Tool
+                   │
+                   ▼
+           Permission Check
+              /          \
+         Allowed        Denied
+            │              │
+            ▼              ▼
+       Execute Tool    Access Denied
 ```
 
----
-
-## Phase 10 — Testing & Evaluation
-
-### Activities
-
-* Test individual tools
-* Test routing decisions
-* Test permission rules
-* Test API responses
-* Test invalid queries
-* Evaluate routing accuracy
-* Measure execution latency
-
-### Testing Areas
-
-```text
-Tool Selection
-Permission Handling
-API Behaviour
-Error Handling
-Response Accuracy
-Performance
-```
+Authorization is performed **after routing**, ensuring that selecting a tool does not automatically grant permission to execute it.
 
 ---
 
-## Phase 11 — Containerization & Deployment
-
-### Activities
-
-* Containerize the FastAPI backend using Docker
-* Configure production server execution
-* Deploy the backend as a web service
-* Deploy the Streamlit interface separately
-* Connect the frontend with the production API
-
-### Deployment Architecture
+# 🏗️ System Architecture
 
 ```text
-                 Internet
+┌───────────────────────────────────────┐
+│             Streamlit UI             │
+│                                       │
+│  Query • Role • Tool • Permission    │
+│  Latency • Answer • Routing Scores   │
+└───────────────────┬───────────────────┘
+                    │
+                    │ HTTP
+                    ▼
+┌───────────────────────────────────────┐
+│             FastAPI Backend           │
+│                                       │
+│              /chat                    │
+└───────────────────┬───────────────────┘
                     │
                     ▼
-          ┌──────────────────┐
-          │  Streamlit UI    │
-          └────────┬─────────┘
-                   │
-                   │ HTTPS
-                   ▼
-          ┌──────────────────┐
-          │ FastAPI Backend  │
-          │     Render       │
-          └────────┬─────────┘
-                   │
-                   ▼
-          ┌──────────────────┐
-          │   ToolRouter     │
-          │ Routing Engine   │
-          └──────────────────┘
+┌───────────────────────────────────────┐
+│             ToolRouter                │
+│                                       │
+│  Query Analysis                       │
+│  Candidate Generation                 │
+│  Routing Score                        │
+│  Tool Selection                       │
+│  Permission Validation                │
+└───────────┬───────────┬───────────────┘
+            │           │
+            ▼           ▼
+     ┌────────────┐ ┌───────────────┐
+     │   Tools    │ │ Security Layer│
+     └─────┬──────┘ └───────────────┘
+           │
+     ┌─────┼──────────┬─────────────┐
+     ▼     ▼          ▼             ▼
+ Calculator Database  RAG         Search
 ```
 
 ---
 
-## Phase 12 — Monitoring & Future Enhancements
+# 🔄 Request Flow
 
-### Current Monitoring
+A typical request follows this pipeline:
 
-* Request tracing
-* Execution latency
-* Routing scores
-* Permission decisions
-
-### Future Enhancements
-
-* LLM-based semantic routing
-* Advanced embedding-based tool selection
-* Vector database integration
-* External search APIs
-* Redis caching
-* JWT/OAuth authentication
-* Observability dashboards
-* Advanced routing benchmarks
-* Cost-aware tool optimization
-* Multi-agent orchestration
-
----
-
-# 🛠️ Technology Stack
-
-| Category            | Technologies         |
-| ------------------- | -------------------- |
-| Programming         | Python               |
-| Backend             | FastAPI, Uvicorn     |
-| AI / Agentic        | LangChain, LangGraph |
-| Knowledge Retrieval | RAG, Embeddings      |
-| Database            | SQLite               |
-| Frontend            | Streamlit            |
-| Deployment          | Docker, Render       |
-| Testing             | Pytest               |
-| CI/CD               | GitHub Actions       |
+```text
+1. User submits a query
+              ↓
+2. Query is analyzed
+              ↓
+3. Candidate tools are identified
+              ↓
+4. Routing scores are calculated
+              ↓
+5. Best tool is selected
+              ↓
+6. User role is validated
+              ↓
+7. Authorized tool is executed
+              ↓
+8. Result is returned
+              ↓
+9. Latency and routing information are exposed
+```
 
 ---
 
-# 📁 Project Structure
+# 📊 Example
+
+### Input
+
+```json
+{
+  "query": "What is 25 * 4?",
+  "role": "employee"
+}
+```
+
+### Routing
+
+```text
+Candidate Tools
+       ↓
+Calculator       ← Highest score
+Database
+Document Search
+Search
+       ↓
+Permission Check
+       ↓
+Granted
+       ↓
+Calculator
+       ↓
+100
+```
+
+### Result
+
+```text
+Selected Tool : calculator
+Permission    : Granted
+Answer        : 100
+```
+
+---
+
+# 📚 Project Structure
 
 ```text
 ToolRouter/
 │
 ├── app/
+│   ├── __init__.py
 │   ├── agent.py
 │   ├── main.py
 │   ├── registry.py
 │   ├── router.py
 │   ├── security.py
 │   ├── tracing.py
+│   │
 │   └── tools/
+│       ├── __init__.py
 │       ├── calculator.py
 │       ├── database.py
 │       ├── rag.py
@@ -384,6 +379,7 @@ ToolRouter/
 │       └── project_documentation.txt
 │
 ├── tests/
+│   ├── __init__.py
 │   ├── evaluate.py
 │   └── test_router.py
 │
@@ -394,70 +390,159 @@ ToolRouter/
 │   └── workflows/
 │       └── test.yml
 │
+├── .env.example
+├── .gitignore
 ├── Dockerfile
-├── requirements.txt
-└── README.md
+├── README.md
+└── requirements.txt
 ```
 
 ---
 
-# 💡 Key Innovation
+# 🧪 Testing
 
-ToolRouter separates **intelligent tool selection** from **permission enforcement**.
+The project includes automated tests for routing and tool behavior.
 
-Instead of directly executing a tool based only on query similarity, the framework considers multiple factors:
+Testing covers:
+
+* Tool selection
+* Permission handling
+* API behavior
+* Error handling
+* Routing decisions
+* Response generation
+* Performance measurement
+
+CI tests are automatically executed through **GitHub Actions**.
+
+---
+
+# ☁️ Deployment
+
+The project uses a separated frontend and backend architecture.
 
 ```text
-Query
-  ↓
-Candidate Tools
-  ↓
-Relevance
-  +
-Risk
-  +
-Cost
-  +
-Latency
-  +
-Permissions
-  ↓
-Best Tool
-  ↓
-Authorization
-  ↓
-Execution
+                  Internet
+                     │
+                     ▼
+          ┌─────────────────────┐
+          │    Streamlit UI     │
+          │      Frontend       │
+          └──────────┬──────────┘
+                     │
+                     │ HTTPS
+                     ▼
+          ┌─────────────────────┐
+          │    FastAPI API      │
+          │      Render         │
+          └──────────┬──────────┘
+                     │
+                     ▼
+          ┌─────────────────────┐
+          │     ToolRouter      │
+          │    Routing Engine   │
+          └─────────────────────┘
 ```
 
-This makes the framework more suitable for **secure enterprise AI and agentic applications**.
+### Backend
+
+FastAPI backend is containerized using Docker and deployed as a web service.
+
+### Frontend
+
+The Streamlit interface communicates with the deployed FastAPI backend through HTTP requests.
 
 ---
 
-# 🎯 Use Cases
+# 🔮 Future Enhancements
 
-* Enterprise AI assistants
-* Secure agentic AI systems
-* Internal knowledge assistants
-* Multi-tool AI applications
-* RAG-based enterprise systems
-* AI workflow automation
-* Function-calling applications
-* Permission-aware AI agents
+* LLM-based semantic tool routing
+* Advanced embedding-based routing
+* Vector database integration
+* External search API integration
+* Redis-based caching
+* JWT/OAuth authentication
+* Advanced observability
+* Routing accuracy benchmarks
+* Cost-aware tool optimization
+* Dynamic tool discovery
+* Multi-agent orchestration
+* Enterprise-scale monitoring
+
+---
+
+# 🎓 Learning Outcomes
+
+This project demonstrates practical experience in:
+
+* Python backend development
+* REST API design
+* Agentic AI architecture
+* Tool/function calling
+* RAG systems
+* Role-based authorization
+* Modular software architecture
+* Database integration
+* Docker containerization
+* Cloud deployment
+* Automated testing and CI/CD
+* Frontend-backend integration
+
+---
+
+# 🌟 Why ToolRouter?
+
+ToolRouter is designed around a simple principle:
+
+> **Choose the right tool first, verify permission second, and execute safely.**
+
+By combining intelligent routing, authorization, modular tool integration, and observability, ToolRouter provides a foundation for building **secure and scalable multi-tool AI applications**.
 
 ---
 
 # 👩‍💻 Author
 
-**Deepika D**
+### Deepika D
 
-Computer Science and Business Systems
+**B.Tech — Computer Science and Business Systems**
 R.M.K. Engineering College
 
-GitHub: [https://github.com/Deepikadhinakaran](https://github.com/Deepikadhinakaran)
+[GitHub](https://github.com/Deepikadhinakaran)
 
-LinkedIn: [https://linkedin.com/in/deepika-d-4a538628](https://linkedin.com/in/deepika-d-4a538628)
+[LinkedIn](https://linkedin.com/in/deepika-d-4a538628)
 
+---
+
+## ⭐ Project Status
+
+**Active Development**
+
+ToolRouter is continuously being improved with additional routing strategies, tools, security capabilities, and AI integrations.
+
+````
+
+### One important correction before you commit
+
+Your current `streamlit_app.py` says:
+
+```python
+API_URL = os.getenv("TOOLROUTER_API_URL", "http://127.0.0.1:8000")
+````
+
+If you are deploying the UI publicly, change that default to:
+
+```python
+API_URL = os.getenv("TOOLROUTER_API_URL", "https://toolrouter.onrender.com")
 ```
 
-This version is **project-documentation focused**: objectives → phases → architecture → technologies → innovation → use cases, without the local installation/end-to-end setup sections.
+Also make sure `requirements.txt` contains **`streamlit` and `requests`**.
+
+Then commit:
+
+```cmd
+git add README.md ui requirements.txt
+git commit -m "Add professional project documentation and Streamlit UI"
+git push origin main
 ```
+
+
